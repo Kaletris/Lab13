@@ -37,10 +37,9 @@ int main(int argc, char **argv) {
         switch (all) {
             case alap:
                 if (c == '.') {
-                    putchar(c);
-                    fputc(c, kimenet);
+                    putchar('.');
+                    fputc('.', kimenet);
                     all = pont_volt;
-                    break;
                 } else {
                     if (c == 'l') {
                         all = l_volt;
@@ -62,6 +61,13 @@ int main(int argc, char **argv) {
                         fputc('j', kimenet);
                         all = alap;
                         break;
+                    case '.':
+                        putchar('l');
+                        putchar('.');
+                        fputc('l', kimenet);
+                        fputc('.', kimenet);
+                        all = pont_volt;
+                        break;
                     default:
                         putchar('l');
                         putchar(c);
@@ -86,6 +92,15 @@ int main(int argc, char **argv) {
                         fputc('j', kimenet);
                         all = alap;
                         break;
+                    case '.':
+                        putchar('l');
+                        putchar('l');
+                        putchar('.');
+                        fputc('l', kimenet);
+                        fputc('l', kimenet);
+                        fputc('.', kimenet);
+                        all = pont_volt;
+                        break;
                     default:
                         putchar('l');
                         putchar('l');
@@ -98,11 +113,17 @@ int main(int argc, char **argv) {
                 }
                 break;
             case pont_volt:
+                if(c == '.'){
+                    putchar('.');
+                    fputc('.', kimenet);
+                    break;
+                }
                 if (c == 'L') {
                     all = L_volt;
                 } else {
                     putchar(c);
                     fputc(c, kimenet);
+                    all = alap;
                 }
                 break;
 
@@ -117,6 +138,13 @@ int main(int argc, char **argv) {
                         fputc('J', kimenet);
                         all = alap;
                         break;
+                    case '.':
+                        putchar('L');
+                        putchar('.');
+                        fputc('L', kimenet);
+                        fputc('.', kimenet);
+                        all = pont_volt;
+                        break;
                     default:
                         putchar('L');
                         putchar(c);
@@ -127,25 +155,35 @@ int main(int argc, char **argv) {
                 }
                 break;
 
-            case ll_volt:
+            case Ll_volt:
                 switch (c) {
                     case 'l':
-                        putchar('l');
-                        fputc('l', kimenet);
+                        putchar('L');
+                        fputc('L', kimenet);
+                        all = ll_volt;
                         break;
                     case 'y':
                         szaml += 2;
+                        putchar('J');
                         putchar('j');
-                        putchar('j');
-                        fputc('j', kimenet);
+                        fputc('J', kimenet);
                         fputc('j', kimenet);
                         all = alap;
                         break;
-                    default:
+                    case '.':
+                        putchar('L');
                         putchar('l');
+                        putchar('.');
+                        fputc('L', kimenet);
+                        fputc('l', kimenet);
+                        fputc('.', kimenet);
+                        all = pont_volt;
+                        break;
+                    default:
+                        putchar('L');
                         putchar('l');
                         putchar(c);
-                        fputc('l', kimenet);
+                        fputc('L', kimenet);
                         fputc('l', kimenet);
                         fputc(c, kimenet);
                         all = alap;
